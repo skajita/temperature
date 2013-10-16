@@ -57,12 +57,18 @@ public class Temperature {
       double convertedValue;
 
       switch (units) {
-          case KELVIN:     convertedValue = value;
+          case KELVIN:     if (value < 0) throw new IllegalArgumentException();         //Since the temperature cannot go below 0K, if will throw an IllegalArgumentException
+          				   convertedValue = value;
                            break;
-          case CELSIUS:    convertedValue = value + 273.15;
+                           
+          case CELSIUS:    if (value < -273.15) throw new IllegalArgumentException();   //Since the temperature cannot go below -273.15C, if will throw an IllegalArgumentException
+          				   convertedValue = value + 273.15;
                            break;
-          case FAHRENHEIT: convertedValue = (value + 459.67) * 5.0/9.0;
+                           
+          case FAHRENHEIT: if (value < -459.67) throw new IllegalArgumentException();   //Since the temperature cannot go below -459.67F, if will throw an IllegalArgumentException
+          				   convertedValue = (value + 459.67) * 5.0/9.0;
                            break;
+                           
           default:         throw new IllegalArgumentException();
       }
 
@@ -76,12 +82,19 @@ public class Temperature {
       double convertedValue;
 
       switch (units) {
-          case KELVIN:     convertedValue = value;
+      
+          case KELVIN:     if (value < 0)  throw new IllegalArgumentException();		//Since the temperature cannot go below 0K, if will throw an IllegalArgumentException
+          				   convertedValue = value;
                            break;
-          case CELSIUS:    convertedValue = value - 273.15;
+                           
+          case CELSIUS:    if (value < 0)  throw new IllegalArgumentException();		//Since the temperature cannot go below 0K, if will throw an IllegalArgumentException
+          				   convertedValue = value - 273.15;
                            break;
-          case FAHRENHEIT: convertedValue = value * 9.0/5.0 - 459.67;
+                           
+          case FAHRENHEIT: if (value < 0) throw new IllegalArgumentException();        //Since the temperature cannot go below 0K, if will throw an IllegalArgumentException
+          				   convertedValue = value * 9.0/5.0 - 459.67;
                            break;
+                           
           default:         throw new IllegalArgumentException();
       }
 
